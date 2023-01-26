@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  // NOTE: You probably want to change this to another database later on
+  // provider = "sqlite"
+  provider = "mongodb"
+  // referentialIntegrity = "prisma"
+
+  // This value is read from the .env file.
+  url = env("DATABASE_URL")
+}
+
+// Neccessary for Next auth
+model Account {
+  // id                 String  @id @default(cuid())
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String  @db.ObjectId
+  type               String
+  provider           String
+  providerAccountId  String
+  oauth_token        String?
+  oauth_token_secret String?
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("Foto_Account")
+}
+
+model Session {
+  // id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("Foto_Session")
+}
+
+model User {
+  // id            String    @id @default(cuid())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  username      String?   @unique
+  bio           String?   @unique
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  avatar        String?
+  accounts      Account[]
+  sessions      Session[]
+  images        Image[]
+
+  @@map("Foto_User")
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("Foto_VerificationToken")
+}
+
+model Image {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  // id        String    @id @default(cuid())
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?   @db.ObjectId
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  fileName  String
+  s3Key     String
+  extension String?
+
+  @@map("Foto_Image")
+}
