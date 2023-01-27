@@ -13,7 +13,7 @@ import {
 import { Context, PrismaUserSelectFields } from '../context'
 
 const joinPaths = (...paths: any[]) => {
-  return ['foto', ...paths].filter((a) => !!a).join('/')
+  return ['imaj', ...paths].filter((a) => !!a).join('/')
 }
 
 const getUserFromContextOrThrow = async (ctx: Context, fields?: PrismaUserSelectFields) => {
@@ -111,7 +111,7 @@ export const appRouter = router({
     return res
   }),
   getObjectUrl: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
-    const res = await getPresignedGetUrl('foto/' + input)
+    const res = await getPresignedGetUrl('imaj/' + input)
     return res
   }),
   putObject: publicProcedure.input(paramsValidator).mutation(async ({ ctx, input }) => {

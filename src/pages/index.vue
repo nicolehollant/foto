@@ -13,7 +13,7 @@
     <template #header>
       <div class="flex items-center gap-6">
         <Icon name="mdi:camera" class="text-xl text-neutral-400 hover:text-white"></Icon>
-        <h1>Foto</h1>
+        <h1>Imaj</h1>
       </div>
       <AccountButton></AccountButton>
     </template>
@@ -91,9 +91,9 @@ const uploadMany = async (files: { blob: Blob | string; filename: string | null;
     success.value = true
     fileList.value = null
     if (myAccount.data.value?.id) {
-      image.value = `https://object.nyc3.cdn.digitaloceanspaces.com/foto/${myAccount.data.value.id}/${s3Keys[0]}`
+      image.value = `https://object.nyc3.cdn.digitaloceanspaces.com/imaj/${myAccount.data.value.id}/${s3Keys[0]}`
     } else {
-      image.value = `https://object.nyc3.cdn.digitaloceanspaces.com/foto/${s3Keys[0]}`
+      image.value = `https://object.nyc3.cdn.digitaloceanspaces.com/imaj/${s3Keys[0]}`
     }
     console.log({ success })
     setTimeout(() => {
