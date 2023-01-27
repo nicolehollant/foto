@@ -20,10 +20,4 @@ watch(
   },
   { immediate: true }
 )
-
-onMounted(() => {
-  if (status.value == 'unauthenticated') {
-    signIn('auth0')
-  }
-})
 </script>
