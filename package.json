@@ -35,6 +35,7 @@
     "senp-ui": "^0.0.35",
     "superjson": "^1.12.1",
     "trpc-nuxt": "^0.4.4",
+    "tslib": "^2.5.0",
     "vue-advanced-cropper": "^2.8.8",
     "zod": "^3.20.2"
   }
