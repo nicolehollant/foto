@@ -15,6 +15,11 @@ export default defineNuxtConfig({
       if (isClient && config?.resolve?.alias) {
         ;(config.resolve.alias as any).vuedraggable = 'vuedraggable/dist/vuedraggable.common.js'
         ;(config.resolve.alias as any)['@aws-sdk/client-s3'] = '@aws-sdk/client-s3/dist-es/index.js'
+        ;(config.resolve.alias as any)['@aws-sdk/client-s3/dist-cjs/index.js'] = '@aws-sdk/client-s3/dist-es/index.js'
+        ;(config.resolve.alias as any)['@aws-sdk/s3-request-presigner'] =
+          '@aws-sdk/s3-request-presigner/dist-es/index.js'
+        ;(config.resolve.alias as any)['@aws-sdk/s3-request-presigner/dist-cjs/index.js'] =
+          '@aws-sdk/s3-request-presigner/dist-es/index.js'
       }
     },
   },
@@ -27,6 +32,9 @@ export default defineNuxtConfig({
     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
     NUXT_AUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  },
+  vite: {
+    vue: {},
   },
   // auth: { origin: process.env.NODE_ENV === 'production' ? 'https://linkedinb.io' : 'http://localhost:3000' },
   // auth: {
