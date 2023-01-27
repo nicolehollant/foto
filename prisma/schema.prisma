@@ -54,7 +54,7 @@ model User {
   // id            String    @id @default(cuid())
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   username      String?   @unique
-  bio           String?   @unique
+  bio           String?
   name          String?
   email         String?   @unique
   emailVerified DateTime?

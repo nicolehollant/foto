@@ -5,6 +5,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '../../db/client'
 
 export default NuxtAuthHandler({
+  debug: true,
   secret: useRuntimeConfig().NUXT_AUTH_SECRET,
   // TODO: ADD YOUR OWN AUTHENTICATION PROVIDER HERE, READ THE DOCS FOR MORE: https://sidebase.io/nuxt-auth
   adapter: PrismaAdapter(prisma!),
