@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     'vite:extendConfig': (config, { isClient, isServer }) => {
       if (isClient && config?.resolve?.alias) {
         ;(config.resolve.alias as any).vuedraggable = 'vuedraggable/dist/vuedraggable.common.js'
+        ;(config.resolve.alias as any)['@aws-sdk/client-s3'] = '@aws-sdk/client-s3/dist-es/index.js'
       }
     },
   },
